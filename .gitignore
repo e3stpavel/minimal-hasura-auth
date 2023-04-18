@@ -1,3 +1,5 @@
 # Hasura executable
 *.exe
 
+# Environment variables
+.env
