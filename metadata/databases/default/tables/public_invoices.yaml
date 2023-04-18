@@ -1,0 +1,83 @@
+table:
+  name: invoices
+  schema: public
+object_relationships:
+  - name: company
+    using:
+      foreign_key_constraint_on: company_id
+  - name: invoice_status
+    using:
+      foreign_key_constraint_on: status
+insert_permissions:
+  - role: protected
+    permission:
+      check:
+        company:
+          users:
+            _and:
+              - id:
+                  _eq: X-Hasura-User-Id
+              - user_role:
+                  value:
+                    _eq: admin
+      set:
+        company_id: x-hasura-
+      columns:
+        - company_id
+        - date
+        - status
+        - total_amount
+select_permissions:
+  - role: protected
+    permission:
+      columns:
+        - date
+        - total_amount
+        - status
+        - created_at
+        - updated_at
+        - company_id
+        - id
+      filter:
+        company:
+          users:
+            id:
+              _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: protected
+    permission:
+      columns:
+        - date
+        - status
+        - total_amount
+      filter:
+        company:
+          users:
+            _and:
+              - id:
+                  _eq: X-Hasura-User-Id
+              - user_role:
+                  value:
+                    _eq: admin
+      check:
+        company:
+          users:
+            _and:
+              - id:
+                  _eq: X-Hasura-User-Id
+              - user_role:
+                  value:
+                    _eq: admin
+delete_permissions:
+  - role: protected
+    permission:
+      filter:
+        company:
+          users:
+            _and:
+              - id:
+                  _eq: X-Hasura-User-Id
+              - user_role:
+                  value:
+                    _eq: admin

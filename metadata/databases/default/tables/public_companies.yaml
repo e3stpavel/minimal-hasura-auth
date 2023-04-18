@@ -1,0 +1,66 @@
+table:
+  name: companies
+  schema: public
+array_relationships:
+  - name: invoices
+    using:
+      foreign_key_constraint_on:
+        column: company_id
+        table:
+          name: invoices
+          schema: public
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: company_id
+        table:
+          name: users
+          schema: public
+select_permissions:
+  - role: protected
+    permission:
+      columns:
+        - name
+        - created_at
+        - updated_at
+        - id
+      filter: {}
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+        - name
+        - created_at
+        - updated_at
+        - id
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: protected
+    permission:
+      columns:
+        - name
+      filter:
+        users:
+          id:
+            _eq: X-Hasura-User-Id
+      check:
+        users:
+          id:
+            _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: protected
+    permission:
+      filter:
+        _and:
+          - users:
+              id:
+                _eq: X-Hasura-User-Id
+          - users:
+              user_role:
+                value:
+                  _eq: admin
+          - invoices:
+              invoice_status:
+                value:
+                  _neq: unpaid

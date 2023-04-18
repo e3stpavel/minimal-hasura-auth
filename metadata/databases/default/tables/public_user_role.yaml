@@ -1,0 +1,27 @@
+table:
+  name: user_role
+  schema: public
+is_enum: true
+array_relationships:
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: role
+        table:
+          name: users
+          schema: public
+select_permissions:
+  - role: protected
+    permission:
+      columns:
+        - comment
+        - value
+      filter: {}
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+        - comment
+        - value
+      filter: {}
+      allow_aggregations: true

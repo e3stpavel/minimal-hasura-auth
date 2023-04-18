@@ -1,1 +1,5 @@
-[]
+- "!include public_companies.yaml"
+- "!include public_invoice_status.yaml"
+- "!include public_invoices.yaml"
+- "!include public_user_role.yaml"
+- "!include public_users.yaml"

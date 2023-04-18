@@ -1,0 +1,73 @@
+table:
+  name: users
+  schema: public
+object_relationships:
+  - name: company
+    using:
+      foreign_key_constraint_on: company_id
+  - name: user_role
+    using:
+      foreign_key_constraint_on: role
+insert_permissions:
+  - role: protected
+    permission:
+      check:
+        company:
+          users:
+            _and:
+              - id:
+                  _eq: X-Hasura-User-Id
+              - user_role:
+                  value:
+                    _eq: admin
+      columns:
+        - company_id
+        - created_at
+        - email
+        - full_name
+        - last_name
+        - role
+        - updated_at
+select_permissions:
+  - role: protected
+    permission:
+      columns:
+        - email
+        - full_name
+        - last_name
+        - role
+        - created_at
+        - updated_at
+        - company_id
+        - id
+      filter:
+        company:
+          users:
+            id:
+              _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: protected
+    permission:
+      columns:
+        - email
+        - full_name
+        - last_name
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check:
+        id:
+          _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: protected
+    permission:
+      filter:
+        company:
+          users:
+            _and:
+              - id:
+                  _eq: X-Hasura-User-Id
+              - user_role:
+                  value:
+                    _eq: admin
