@@ -1,18 +1,24 @@
-# Vue 3 + TypeScript + Vite
+# :mechanical_arm: Minmal Hasura Auth
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Features
 
-## Recommended IDE Setup
+- [Vite](https://vitejs.dev/) + [Vue](https://vuejs.org/) SFC + [UnoCSS](https://unocss.dev/)
+- [Hasura Cloud](https://hasura.io/)
+- Apollo Client
+- GraphQL
+- [Auth0](https://auth0.com/)
+- File based routing
+- [ESLint](https://eslint.org/) to style the code with [`antfu/eslint-config`](https://github.com/antfu/eslint-config)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Development
 
-## Type Support For `.vue` Imports in TS
+1. add `.env` according to [example](https://github.com/e3stpavel/minimal-hasura-auth/blob/main/db/.env.example) and [install Hasura]() if you want to connect to Hasura locally.
+2. add `.env` to the application itself according to this [example](https://github.com/e3stpavel/minimal-hasura-auth/blob/main/.env.example).
+3. _-- there also should be a lot of set up using Auth0 and Hasura but I'll omit it here --_
+4. Basically you're ready to go. 
+   - `pnpm dev` - dev server
+   - `pnpm build` - typecheck and build
+   - `pnpm preview` - preview the build locally
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## License
+MIT
