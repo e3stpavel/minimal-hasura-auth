@@ -45,23 +45,23 @@ function userSignOut() {
 
             <button id="user-menu-button" type="button" class="peer/user flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false">
               <span class="sr-only">Open user menu</span>
-              <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+              <img
+                class="w-8 h-8 rounded-full"
+                :src="user.picture ?? 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'"
+                alt="user photo"
+              >
             </button>
 
             <div id="dropdown" class="peer-focus-within/user:block absolute top-4 right-0 hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:(bg-gray-700 divide-gray-600)">
               <div class="py-3 px-4">
-                <span class="block text-sm font-semibold text-gray-900 dark:text-inherit">{{ user.name }}</span>
+                <span class="block text-sm font-semibold text-gray-900 dark:text-inherit">@{{ user.nickname }}</span>
                 <span class="block text-sm font-light text-gray-500 truncate dark:text-gray-400">{{ user.email }}</span>
-              </div>
 
-              <!-- <ul class="py-1 font-light text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
-                <li>
-                  <button class="flex items-center gap-x-2 w-full py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" @click="userSignOut()">
-                    <span class="i-material-symbols-logout text-lg" />
-                    <span class="">Sign out</span>
-                  </button>
-                </li>
-              </ul> -->
+                <span :class="user.email_verified ? 'bg-green-100 text-green-800 dark:(bg-green-900 text-green-300)' : 'bg-red-100 text-red-800 dark:(bg-red-900 text-red-300)'" class="mt-2 inline-flex items-center  text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">
+                  <span :class="user.email_verified ? 'bg-green-500' : 'bg-red-500'" class="w-2 h-2 mr-1 rounded-full" />
+                  <span class="first-letter:uppercase">{{ `${user.email_verified ? '' : 'not'} verified` }}</span>
+                </span>
+              </div>
             </div>
           </template>
         </div>

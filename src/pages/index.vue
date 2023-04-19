@@ -1,8 +1,33 @@
 <script setup lang="ts">
+import { gql } from '@apollo/client/core'
 import { useAuth0 } from '@auth0/auth0-vue'
+import { useLazyQuery } from '@vue/apollo-composable'
 import Header from '~/components/Header.vue'
 
+interface Invoice {
+  id: string
+  date: Date
+}
+
 const { isAuthenticated } = useAuth0()
+const { result, load, error, loading } = useLazyQuery(gql`
+  query {
+    invoices {
+      date
+      id
+      created_at
+      updated_at
+      invoice_status {
+        value
+        comment
+      }
+      total_amount
+      company {
+        name
+      }
+    }
+  }
+`, null, { fetchPolicy: 'no-cache' })
 </script>
 
 <template>
@@ -32,12 +57,30 @@ query GetInvoices {
     </code>
 
     <div class="flex-center">
-      <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:(ring-4 ring-blue-300 outline-none) font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:(bg-blue-600 hover:bg-blue-700 focus:ring-blue-800)">
+      <button type="button" :disabled="loading" class="text-white bg-blue-700 hover:bg-blue-800 focus:(ring-4 ring-blue-300 outline-none) font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:(bg-blue-600 hover:bg-blue-700 focus:ring-blue-800)" @click="load()">
         Send request ->
       </button>
       <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:(outline-none z-10 ring-4 ring-gray-200) bg-white rounded-lg border border-gray-200 hover:(bg-gray-100 text-blue-700) dark:(focus:ring-gray-700 bg-gray-800 text-gray-400 border-gray-600 hover:(text-white bg-gray-700))">
         View companies
       </button>
     </div>
+
+    <template v-if="error">
+      <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+        <span class="font-medium">Error occured!</span> {{ error.message }}.
+      </div>
+    </template>
+
+    <template v-if="loading">
+      <div role="status" class="space-y-2.5 animate-pulse max-w-lg">
+        <div v-for="n in 6" :key="n" class="flex items-center w-full space-x-2">
+          <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32" />
+          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24" />
+          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full" />
+        </div>
+        <span class="sr-only">Loading...</span>
+      </div>
+    </template>
+    <p>{{ result }}</p>
   </main>
 </template>
