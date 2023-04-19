@@ -21,16 +21,22 @@ html {
   min-height: calc(100% + env(safe-area-inset-top));
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+body {
+  --at-apply: font-sans dark:(text-light bg-slate-900);
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+#nprogress {
+  pointer-events: none;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+#nprogress .bar {
+  --at-apply: bg-blue-800 dark:bg-blue-300;
+  opacity: 0.75;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
 }
 </style>

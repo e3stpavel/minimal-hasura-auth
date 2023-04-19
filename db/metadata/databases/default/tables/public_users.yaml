@@ -8,6 +8,13 @@ object_relationships:
   - name: user_role
     using:
       foreign_key_constraint_on: role
+computed_fields:
+  - name: full_name
+    definition:
+      function:
+        name: user_full_name
+        schema: public
+    comment: Concatenates user's first and last name into fullname
 insert_permissions:
   - role: protected
     permission:

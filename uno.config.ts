@@ -22,7 +22,8 @@ export default defineConfig<Theme>({
   ],
   theme: {
     fontFamily: {
-      sans: ['"Pretendard Std Variable"', '"Pretendard Std"', theme.fontFamily.sans].join(','),
+      sans: ['"Pretendard Std Variable"', '"Pretendard Std"', 'Inter', theme.fontFamily.sans].join(','),
+      mono: ['"Azeret Mono"', theme.fontFamily.mono].join(','),
     },
   },
   transformers: [
