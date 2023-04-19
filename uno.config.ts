@@ -46,7 +46,7 @@ export default defineConfig<Theme>({
         ? `${supports}l-${v} ${supports}t-${v}`
         : axis === 'x' ? `${supports}l-${v}` : `${supports}t-${v}`
 
-      return `gap-${axis}-${v} ${rule}`
+      return `gap${axis === '' ? '' : `-${axis}`}-${v} ${rule}`
     }],
   ],
 })
