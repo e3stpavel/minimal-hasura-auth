@@ -1,5 +1,7 @@
 # :mechanical_arm: Minmal Hasura Auth
 
+![localhost_3000_(Web 1440 XD)](https://user-images.githubusercontent.com/70956582/233124261-ff308a30-e40c-4918-8c42-737de6e70d16.png)
+
 ## Features
 
 - [Vite](https://vitejs.dev/) + [Vue](https://vuejs.org/) SFC + [UnoCSS](https://unocss.dev/)
