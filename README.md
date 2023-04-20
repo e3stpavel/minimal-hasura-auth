@@ -4,23 +4,35 @@
 
 ## Features
 
-- [Vite](https://vitejs.dev/) + [Vue](https://vuejs.org/) SFC + [UnoCSS](https://unocss.dev/)
-- [Hasura Cloud](https://hasura.io/)
-- Apollo Client
-- GraphQL
-- [Auth0](https://auth0.com/)
-- File based routing
-- [ESLint](https://eslint.org/) to style the code with [`antfu/eslint-config`](https://github.com/antfu/eslint-config)
+- :zap: [Vite](https://vitejs.dev/) + [Vue](https://vuejs.org/) SFC + pnpm
+- :art: [UnoCSS](https://unocss.dev/)
+- :cloud: [Hasura Cloud](https://hasura.io/)
+- :heavy_check_mark: Apollo Client
+- :white_check_mark: GraphQL
+- :lock: [Auth0](https://auth0.com/)
+- :file_folder: File based routing
+- :muscle: TypeScript, of course
+- :wrench: [ESLint](https://eslint.org/) to style the code with [`antfu/eslint-config`](https://github.com/antfu/eslint-config)
 
 ## Development
 
-1. add `.env` according to [example](https://github.com/e3stpavel/minimal-hasura-auth/blob/main/db/.env.example) and [install Hasura]() if you want to connect to Hasura locally.
-2. add `.env` to the application itself according to this [example](https://github.com/e3stpavel/minimal-hasura-auth/blob/main/.env.example).
-3. _-- there also should be a lot of set up using Auth0 and Hasura but I'll omit it here --_
-4. Basically you're ready to go. 
+### Hasura Cloud
+1. Make sure you've [installed Hasura](https://github.com/hasura/graphql-engine/releases)
+1. Add it to path or put it inside `db` directory
+1. Add `.env` according to [example](https://github.com/e3stpavel/minimal-hasura-auth/blob/main/db/.env.example)
+1. Launch it using `hasura console`
+1. To sync the changes with the cloud use `hasura deploy --with-seeds`
+
+### Vue application
+1. Install the dependencies using `pnpm install`
+2. Add `.env` variables according to this [example](https://github.com/e3stpavel/minimal-hasura-auth/blob/main/.env.example).
+3. Basically you're ready to go: 
    - `pnpm dev` - dev server
    - `pnpm build` - typecheck and build
    - `pnpm preview` - preview the build locally
+
+### GitHub Actions
+Automatic on push branch `main` action is disabled, therefore you should go to the actions tab and trigger the deployment manually.
 
 ## License
 MIT
