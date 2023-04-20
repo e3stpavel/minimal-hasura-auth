@@ -1,6 +1,6 @@
 import { createApp, h, provide } from 'vue'
 import { createAuth0 } from '@auth0/auth0-vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client/core'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 
@@ -13,7 +13,7 @@ import 'uno.css'
 
 // router
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 })
 
@@ -32,7 +32,7 @@ const auth0 = createAuth0({
   domain: import.meta.env.VITE_AUTH_DOMAIN,
   clientId: import.meta.env.VITE_AUTH_CLIENT_ID,
   authorizationParams: {
-    redirect_uri: new URL(import.meta.env.BASE_URL, window.location.origin).toString(),
+    redirect_uri: window.location.href,
     audience: import.meta.env.VITE_AUTH_AUDIENCE,
   },
 })

@@ -5,7 +5,7 @@ import { isDark, toggleDark } from '~/composables/dark'
 const { logout, loginWithRedirect: userSignIn, user, isAuthenticated } = useAuth0()
 
 function userSignOut() {
-  return logout({ logoutParams: { returnTo: window.location.origin } })
+  return logout({ logoutParams: { returnTo: window.location.href } })
 }
 </script>
 
